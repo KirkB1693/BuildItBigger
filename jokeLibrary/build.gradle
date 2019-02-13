@@ -1,0 +1,10 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
+
+if (project.hasProperty('JDK7_HOME')) { options.bootClasspath = "$JDK7_HOME/jre/lib/rt.jar"}
