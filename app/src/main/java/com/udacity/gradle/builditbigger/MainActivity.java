@@ -1,18 +1,13 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.util.Pair;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
-import com.example.android.displayjoke.DisplayJokeActivity;
-import com.example.android.jokelibrary.JokeTeller;
 import com.google.android.gms.ads.MobileAds;
+import com.udacity.gradle.builditbigger.paid.MainActivityFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +17,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MobileAds.initialize(this, getString(R.string.app_ad_id));
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment, new MainActivityFragment());
+        ft.commit();
+
     }
 
 
@@ -46,19 +45,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void tellJoke(View view) {
-        JokeTeller jokeTeller = new JokeTeller();
-        String joke = jokeTeller.getAJoke();
-        Toast.makeText(this, joke, Toast.LENGTH_SHORT).show();
-        displayJoke(joke);
-    }
-
-    private void displayJoke(String joke) {
-        Intent intent = new Intent(this, DisplayJokeActivity.class);
-        intent.putExtra(DisplayJokeActivity.JOKE_KEY, joke);
-        startActivity(intent);
     }
 
 
