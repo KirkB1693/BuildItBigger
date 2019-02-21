@@ -24,6 +24,13 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    configurations {
+        all {
+            exclude module: 'commons-logging'
+            exclude group: 'org.apache.httpcomponents'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false

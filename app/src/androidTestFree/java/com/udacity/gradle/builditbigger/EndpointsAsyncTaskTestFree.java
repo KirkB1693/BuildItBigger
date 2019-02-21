@@ -32,7 +32,7 @@ public class EndpointsAsyncTaskTestFree {
             }
         };
         testAsyncTask.execute(mainActivityFragment);
-        // stop and wait for latch to equal zero before proceding
+        // stop and wait for latch to equal zero before continuing
         latch.await();
     }
 }
