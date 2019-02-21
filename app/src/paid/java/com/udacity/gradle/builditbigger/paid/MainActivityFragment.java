@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.example.android.displayjoke.DisplayJokeActivity;
-import com.udacity.gradle.builditbigger.EndpointsAsyncTask;
 import com.udacity.gradle.builditbigger.R;
 
 
@@ -46,16 +45,18 @@ public class MainActivityFragment extends Fragment {
         return root;
     }
 
-    public void getJoke(){
+    private void getJoke(){
         new EndpointsAsyncTask().execute(this);
     }
 
     public void displayJoke(){
         Context context = getActivity();
-        Intent intent = new Intent(context, DisplayJokeActivity.class);
-        intent.putExtra(DisplayJokeActivity.JOKE_KEY, loadJoke);
-        //Toast.makeText(context, loadJoke, Toast.LENGTH_LONG).show();
-        context.startActivity(intent);
-        mProgressBar.setVisibility(View.GONE);
+        if (context != null) {
+            Intent intent = new Intent(context, DisplayJokeActivity.class);
+            intent.putExtra(DisplayJokeActivity.JOKE_KEY, loadJoke);
+            //Toast.makeText(context, loadJoke, Toast.LENGTH_LONG).show();
+            context.startActivity(intent);
+            mProgressBar.setVisibility(View.GONE);
+        }
     }
 }
